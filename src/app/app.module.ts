@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { PostListComponent } from './post/post-list/post-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducer } from './store/app.state';
 
 
 @NgModule({
@@ -31,9 +32,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    StoreModule.forRoot({
-     counter:counterReducer
-    }),
+    StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({ logOnly: !isDevMode() })
   ],
   providers: [],
