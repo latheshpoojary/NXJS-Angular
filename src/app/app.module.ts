@@ -10,6 +10,9 @@ import { CounterComponent } from './counter/counter/counter.component';
 import { CounterOutputComponent } from './counter/counter-output/counter-output.component';
 import { CounterButtonComponent } from './counter/counter-button/counter-button.component';
 import { CustomInputComponent } from './counter/custom-input/custom-input.component';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { PostListComponent } from './post/post-list/post-list.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { CustomInputComponent } from './counter/custom-input/custom-input.compon
     CounterComponent,
     CounterOutputComponent,
     CounterButtonComponent,
-    CustomInputComponent
+    CustomInputComponent,
+    HomeComponent,
+    HeaderComponent,
+    PostListComponent
   ],
   imports: [
     BrowserModule,
