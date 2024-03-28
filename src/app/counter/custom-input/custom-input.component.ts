@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { changeName, customInput } from 'src/app/state/counter.action';
 import { getName } from 'src/app/state/counter.selector';
 import { CounterState } from 'src/app/state/counter.state';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-custom-input',
@@ -13,7 +14,7 @@ export class CustomInputComponent {
 
   ownerName!: string;
   countValue!: number;
-  constructor(private store: Store<{ counter: CounterState }>) {
+  constructor(private store: Store<AppState>) {
     this.store.select(getName).subscribe(data => {
       this.ownerName = data;
     })
