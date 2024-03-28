@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { CustomInputComponent } from './counter/custom-input/custom-input.compon
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { PostListComponent } from './post/post-list/post-list.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { PostListComponent } from './post/post-list/post-list.component';
     FormsModule,
     StoreModule.forRoot({
      counter:counterReducer
-    })
+    }),
+    StoreDevtoolsModule.instrument({ logOnly: !isDevMode() })
   ],
   providers: [],
   bootstrap: [AppComponent]
