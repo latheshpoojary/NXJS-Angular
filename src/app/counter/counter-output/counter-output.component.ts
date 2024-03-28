@@ -2,6 +2,7 @@ import { state } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getCounter } from 'src/app/state/counter.selector';
 import { CounterState } from 'src/app/state/counter.state';
 
 @Component({
@@ -12,11 +13,11 @@ import { CounterState } from 'src/app/state/counter.state';
 export class CounterOutputComponent implements OnInit{
   counter: any;
 
-  counter$!:Observable<{counter:number}>
+  counter$!: Observable<{}>;
   constructor(private store: Store<{ counter:CounterState }>) { }
   
   ngOnInit(): void {
-    this.counter$ = this.store.select('counter');
+    this.counter$ = this.store.select(getCounter);
   }
 
   

@@ -1,9 +1,11 @@
 
 export interface CounterState{
-	counter:number
+	counter: number,
+	name:string
 }
 
 
 export const initialState:CounterState = {
-	counter:4
+	counter: 4,
+	name:'vikash'
 }

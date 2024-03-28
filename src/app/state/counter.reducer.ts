@@ -1,6 +1,6 @@
 import { State, createReducer, on } from "@ngrx/store";
 import { initialState } from "./counter.state";
-import { customInput, decrement, increment, reset } from "./counter.action";
+import { changeName, customInput, decrement, increment, reset } from "./counter.action";
 import { state } from "@angular/animations";
 import { Action } from "rxjs/internal/scheduler/Action";
 
@@ -24,6 +24,12 @@ const _counterReducer = createReducer(initialState, on(increment, (state:any) =>
 	return {
 		...state,
 		counter:state.counter + action.count
+	}
+}), on(changeName, (state:any) => {
+	return {
+		...state,
+		name:'lathesh'
+
 	}
 }))
 
