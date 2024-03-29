@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './state/counter.reducer';
 import { CounterComponent } from './counter/counter/counter.component';
@@ -15,6 +15,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { PostListComponent } from './post/post-list/post-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './store/app.state';
+import { PostAddComponent } from './post/post-add/post-add.component';
 
 
 @NgModule({
@@ -26,12 +27,14 @@ import { appReducer } from './store/app.state';
     CustomInputComponent,
     HomeComponent,
     HeaderComponent,
-    PostListComponent
+    PostListComponent,
+    PostAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({ logOnly: !isDevMode() })
   ],
