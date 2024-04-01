@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { addPost } from '../state/posts.action';
-import { ActivatedRoute } from '@angular/router';
+import { addPost, updatePost } from '../state/posts.action';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getPostById } from '../state/post.selector';
+import { Post } from 'src/app/modal/post.modal';
 
 @Component({
   selector: 'app-post-add',
@@ -17,7 +18,7 @@ export class PostAddComponent {
 
 
   postForm!: FormGroup;
-  constructor(private fb:FormBuilder,private store:Store<AppState>,private route:ActivatedRoute) {
+  constructor(private fb:FormBuilder,private store:Store<AppState>,private route:ActivatedRoute,private router:Router) {
     this.postForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(6)]],
       desc:['',[Validators.required,Validators.minLength(10)]]
@@ -76,15 +77,19 @@ export class PostAddComponent {
   onAddPost() {
     if (this.postForm.valid) {
 
-      let post = {
+      let postVal:Post = {
         title: this.postForm.value.title,
         desc:this.postForm.value.desc
       }
       if (this.routerPostId) {
+        //if router value is there then it is for update
+        postVal.id= this.routerPostId;
+        this.store.dispatch(updatePost({ post: postVal }));  //for update
       } else {
-        this.store.dispatch(addPost({ post: post }));
+        this.store.dispatch(addPost({ post: postVal }));  //for insert
       }
       this.postForm.reset();
+      this.router.navigate(['post']);
     }
     
   }

@@ -5,7 +5,7 @@
 		"editor.minimap.enabled": false,
 		"editor.scrollbar.verticalScrollbarSize": 0,
 		"workbench.activityBar.visible": "undefined",
-		"workbench.statusBar.visible": false,
+		"workbench.statusBar.visible": true,
 		"workbench.colorTheme": "GitHub Dark Default",
 		"workbench.colorCustomizations": {
 			"[GitHub Dark Default]": {
