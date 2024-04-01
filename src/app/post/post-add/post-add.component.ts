@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { addPost } from '../state/posts.action';
+import { ActivatedRoute } from '@angular/router';
+import { getPostById } from '../state/post.selector';
 
 @Component({
   selector: 'app-post-add',
@@ -11,12 +13,34 @@ import { addPost } from '../state/posts.action';
 })
 export class PostAddComponent {
 
+  routerPostId!: string | null;
+
+
   postForm!: FormGroup;
-  constructor(private fb:FormBuilder,private store:Store<AppState>) {
+  constructor(private fb:FormBuilder,private store:Store<AppState>,private route:ActivatedRoute) {
     this.postForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(6)]],
       desc:['',[Validators.required,Validators.minLength(10)]]
     })
+    this.route.paramMap.subscribe(routes => {
+      this.routerPostId = routes.get('id');
+      if (this.routerPostId) {
+        this.setFormData();
+      }
+      console.log(this.routerPostId);
+      
+    })
+  }
+
+  setFormData() {
+    
+    this.store.select(getPostById, { id: this.routerPostId }).subscribe(res => {
+      this.postForm.setValue({
+        title: res.title,
+        desc:res.desc
+      })
+    })
+    
   }
 
 
@@ -51,11 +75,15 @@ export class PostAddComponent {
 
   onAddPost() {
     if (this.postForm.valid) {
+
       let post = {
         title: this.postForm.value.title,
         desc:this.postForm.value.desc
       }
-      this.store.dispatch(addPost({ post: post }));
+      if (this.routerPostId) {
+      } else {
+        this.store.dispatch(addPost({ post: post }));
+      }
       this.postForm.reset();
     }
     

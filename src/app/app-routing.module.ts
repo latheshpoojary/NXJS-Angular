@@ -19,6 +19,9 @@ const routes: Routes = [
     path: 'post', component: PostListComponent, children: [
       {
         path:'add' , component:PostAddComponent
+      },
+      {
+        path:'edit/:id',component:PostAddComponent
       }
     ]
   }
