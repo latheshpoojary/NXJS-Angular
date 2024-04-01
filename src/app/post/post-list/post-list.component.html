@@ -24,7 +24,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let post of posts$ | async">
+					<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let post of post">
 						<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 							{{post.id}}
 						</th>
@@ -37,7 +37,7 @@
 						<td class="flex items-center px-6 py-4">
 							<a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
 								[routerLink]="['edit',post.id]">Edit</a>
-							<a  class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3" data-modal-target="popup-modal" data-modal-toggle="popup-modal" backdrop="static">Remove</a>
+							<a  class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3 cursor-pointer" data-modal-target="popup-modal" data-modal-toggle="popup-modal" backdrop="static" (click)="deletingPostId=post.id">Remove</a>
 
 							
 
@@ -64,7 +64,7 @@
 											<h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to
 												delete this product?</h3>
 											<button data-modal-hide="popup-modal" type="button"
-												class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+												class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" (click)="onDelete()">
 												Yes, I'm sure
 											</button>
 											<button data-modal-hide="popup-modal" type="button"
